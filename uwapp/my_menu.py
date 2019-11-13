@@ -87,7 +87,11 @@ class MyMenu(UWMenu):
     def about(self, button):
         self.app.clear_menu()
         
-        aboutDialog = AboutDialog(self.app, 'About', 'UWApp 0.2, \nbased on urwid\n', 25, 8)
+        aboutDialog = AboutDialog(
+            self.app, 
+            'About', 
+            'UWApp 0.3\n\nTUI based on urwid library in Python 3\nHu, Ying-Hao(hyinghao@hotmail.com)\n', 
+            46, 8)
         aboutDialog.popup()
         
         self.app.set_focus_path(['body',1])

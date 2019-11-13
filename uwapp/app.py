@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*
 import urwid
 from uwapp.my_menu import MyMenu
 from uwapp.widget.uw_application import UWApplication

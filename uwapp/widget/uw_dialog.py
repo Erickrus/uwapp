@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*
 import urwid
 import uwapp.util.logging as logging
+from uwapp.widget.uw_linebox import UWLineBox
 
 logger = logging.getLogger(__name__)
 
@@ -8,14 +9,16 @@ logger = logging.getLogger(__name__)
 class UWDialog:
     def __init__(self, app, title, width, height):
         self.app = app
-        self.baseWindow = [urwid.Text(title),  urwid.Divider(u'─'), urwid.Text("")]
+        self.baseWindow = []
         self.width = width
         self.height = height
+        self.title = title
         self.define_dialog()
 
     def define_dialog(self):
-        self.widget = urwid.LineBox(
-            urwid.Filler(urwid.Pile(self.baseWindow))
+        self.widget = UWLineBox(
+            urwid.Filler(urwid.Pile(self.baseWindow)),
+            title = self.title
         )
         
     def close(self):

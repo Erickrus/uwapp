@@ -2,6 +2,7 @@
 import urwid
 
 from uwapp.widget.uw_dialog import UWDialog
+from uwapp.widget.uw_linebox import UWLineBox
 import uwapp.util.logging as logging
 
 logger = logging.getLogger(__name__)
@@ -14,13 +15,17 @@ class AboutDialog(UWDialog):
         
 
     def define_dialog(self):
-        closeButton = urwid.Button("Close")
+        # align=center, only for fixed size dialog
+        closeButtonTitle = "Close"
+        padding = " " * ((self.width -6 - len(closeButtonTitle))//2)
+        closeButton = urwid.Button(padding+"Close"+padding)
         urwid.connect_signal(closeButton, 'click', lambda button: self.close())
-        window = self.baseWindow[:2]
+        window = []
         window.extend([
             urwid.Text(self.content),
             closeButton
         ])
-        self.widget = urwid.LineBox(
-            urwid.Filler(urwid.Pile(window))
+        self.widget = UWLineBox(
+            urwid.Filler(urwid.Pile(window)),
+            title = self.title
         )
