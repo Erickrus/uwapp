@@ -14,9 +14,6 @@ class UWMenu:
         self.level = 0
         self.data = menuData
 
-
-
-
     def _get_menu_size(self, subMenu):
         width, height = 0, 0
         for subMenuItem in subMenu:
@@ -30,7 +27,9 @@ class UWMenu:
     
     def _parse_children(self, menu, vertOff=1, horizOff=0):
         res = ""
-        if menu["type"] == "menu":
+        if menu["type"] == "divider":
+            res = "self.divider()"
+        elif menu["type"] == "menu":
             children = []
             if "subMenu" in menu:
                 for i in range(len(menu["subMenu"])):
@@ -46,13 +45,15 @@ class UWMenu:
                 size = self._get_menu_size(menu["subMenu"])
             children = "[%s]" % ",".join(children)
             res = "self.sub_menu(\"%s\", %s, %d, %d, %d, %d)" % (menu["title"], children, size[0], size[1], vertOff, horizOff)
-            
         elif menu["type"] == "menuItem":
             res = "self.menu_button(\"%s\", %s)" % (menu["title"], menu["callback"])
+
         
         logger.info(str(res))
         return res
 
+    def divider(self):
+        return urwid.Divider(u'─')
 
     def menu_button(self, caption, callback):
         button = UWMenuButton(caption)
