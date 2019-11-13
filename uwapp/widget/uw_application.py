@@ -18,9 +18,11 @@ class UWApplication(urwid.Frame):
         self.currMenuId = -1
         
         self.register_menu(menuClass)
+        self.set_focus_path(['header', 0])
 
     def clear_popup(self):
         self.fill.original_widget= self.fill.original_widget[0]
+        self.set_focus_path(['header',0])
         
     def clear_menu(self):
         if self.currMenuId != -1:
@@ -30,6 +32,8 @@ class UWApplication(urwid.Frame):
                 originMenu.level -= 1
             originMenu.level = 0
             self.currMenuId = -1
+        self.set_focus_path(['header',0])
+        #.set_focus()
             
     def register_menu(self, menuClass):
         self.menuInstances = []
@@ -64,6 +68,7 @@ class UWApplication(urwid.Frame):
             
 
     def show_menu(self, box, width, height, vertOff=0, horizOff=0):
+        #self.set_focus('body')
         self.fill.original_widget = urwid.Overlay(
             urwid.LineBox(box),
             self.fill.original_widget,
@@ -77,11 +82,15 @@ class UWApplication(urwid.Frame):
             bottom = self.menuInstances[self.currMenuId].level*1+height+vertOff # + height
         )
         self.menuInstances[self.currMenuId].level += 1
+        self.set_focus_path(['body',1,0])
 
 
     def keypress(self, size, key):
         if key == 'esc' and self.menuInstances[self.currMenuId].level > 0:
             self.fill.original_widget = self.fill.original_widget[0]
             self.menuInstances[self.currMenuId].level -= 1
+            if self.menuInstances[self.currMenuId].level == 0:
+                self.set_focus_path(['header',0])
         else:
+            #self.set_focus_path(['header',0])
             return super(UWApplication, self).keypress(size, key)

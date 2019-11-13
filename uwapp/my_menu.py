@@ -89,3 +89,5 @@ class MyMenu(UWMenu):
         
         aboutDialog = AboutDialog(self.app, 'About', 'UWApp 0.2, \nbased on urwid\n', 25, 8)
         aboutDialog.popup()
+        
+        self.app.set_focus_path(['body',1])
