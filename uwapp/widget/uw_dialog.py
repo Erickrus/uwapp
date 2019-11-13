@@ -37,3 +37,10 @@ class UWDialog:
             top=0,
             bottom = 0
         )
+        
+    def move(self, x, y):
+        self.app.fill.original_widget.align_type = 'left'
+        self.app.fill.original_widget.valign_type = 'top'
+        self.app.fill.original_widget.left = x
+        self.app.fill.original_widget.top = y
+        
