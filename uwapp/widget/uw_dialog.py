@@ -16,15 +16,15 @@ class UWDialog:
         self.define_dialog()
 
     def define_dialog(self):
-        self.widget = UWLineBox(
-            urwid.Filler(urwid.Pile(self.baseWindow)),
+        self.widget = urwid.AttrMap(UWLineBox(
+            urwid.AttrMap(urwid.Filler(urwid.Pile(self.baseWindow)), 'bg'),
             title = self.title
-        )
+        ),"dialog")
         
     def close(self):
         self.app.clear_popup()
 
-    def popup(self):
+    def show(self):
         self.app.fill.original_widget = urwid.Overlay(
             self.widget,
             self.app.fill.original_widget,

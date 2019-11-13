@@ -48,8 +48,6 @@ class UWMenu:
         elif menu["type"] == "menuItem":
             res = "self.menu_button(\"%s\", %s)" % (menu["title"], menu["callback"])
 
-        
-        logger.info(str(res))
         return res
 
     def divider(self):

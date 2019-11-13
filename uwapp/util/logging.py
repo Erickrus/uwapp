@@ -31,26 +31,31 @@ class Logger:
         if _level >= INFO:
             ts = toolbox.get_timestamp(self.fmt)
             f.write("%s %s %-24s : %s \n"%(ts, 'INFO    ', self.name, str(text)))
+            self.flush()
             
     def debug(self, text):
         if _level >= DEBUG:
             ts = toolbox.get_timestamp(self.fmt)
             f.write("%s %s %-24s : %s \n"%(ts, 'DEBUG   ', self.name, str(text)))
+            self.flush()
         
     def warning(self, text):
         if _level >= WARNING:
             ts = toolbox.get_timestamp(self.fmt)
             f.write("%s %s %-24s : %s \n"%(ts, 'WARNING ', self.name, str(text)))
+            self.flush()
         
     def error(self, text):
         if _level >= ERROR:
             ts = toolbox.get_timestamp(self.fmt)
             f.write("%s %s %-24s : %s \n"%(ts, 'ERROR   ', self.name, str(text)))
+            self.flush()
     
     def critical(self, text):
         if _level >= CRITICAL:
             ts = toolbox.get_timestamp(self.fmt)
             f.write("%s %s %-24s : %s \n"%(ts, 'CRITICAL', self.name, str(text)))
+            self.flush()
             
     def setLevel(self, level):
         _level = level

@@ -22,10 +22,10 @@ class AboutDialog(UWDialog):
         urwid.connect_signal(closeButton, 'click', lambda button: self.close())
         window = []
         window.extend([
-            urwid.Text(self.content),
-            closeButton
+            urwid.AttrMap(urwid.Text(self.content),'dialog.content'),
+            urwid.AttrMap(closeButton, 'button')
         ])
-        self.widget = UWLineBox(
-            urwid.Filler(urwid.Pile(window)),
+        self.widget = urwid.AttrMap(UWLineBox(
+            urwid.AttrMap(urwid.Filler(urwid.Pile(window)), 'dialog'),
             title = self.title
-        )
+        ), 'dialog')
