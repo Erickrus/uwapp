@@ -25,10 +25,15 @@ class PreferenceDialog(UWDialog):
     def save_preference(preference):
         with open(PreferenceDialog.preferenceFilename, "w") as f:
             f.write(json.dumps(preference))
-            
-    
+
     def __init__(self, app, title, width, height):
-        super(PreferenceDialog, self).__init__(app, title, width, height)        
+        self.app = app
+        self.baseWindow = []
+        self.width = width
+        self.height = height
+        self.title = title
+        self.themes = ["TurboVision","RedHat","Console"]
+        self.preference = PreferenceDialog.load_preference()
         self.define_dialog()
         
     def apply(self):
@@ -52,12 +57,24 @@ class PreferenceDialog(UWDialog):
         urwid.connect_signal(applyButton, 'click', lambda button: self.apply())
         window = []
         
+        radioButtonInstances = []
+        for i in range(len(self.themes)):
+            radioButtonName =  self.themes[i]
+            selected = False
+            if self.themes[i].lower() == self.preference["theme"].lower():
+                selected = True
+            radioButtonInstance = urwid.AttrMap(
+                urwid.RadioButton(
+                    self.options, 
+                    radioButtonName,
+                    selected
+                ), 
+                'radiobutton'
+            )
+            radioButtonInstances.append(radioButtonInstance)
+
         
-        turboVision = urwid.RadioButton(self.options, u"TurboVision")
-        redHat = urwid.RadioButton(self.options, u"RedHat")
-        console = urwid.RadioButton(self.options, u"Console")
-        
-        radioButtons = urwid.GridFlow([turboVision, redHat, console], 25, 3, 1, 'left')
+        radioButtons = urwid.GridFlow(radioButtonInstances, self.width - 2, 3, 1, 'left')
         
         window.extend([
             urwid.AttrMap(urwid.Text("Themes\n"),'dialog.content'),

@@ -13,4 +13,4 @@ export PYTHONPATH=`pwd`
 python3.6 uwapp/app.py
 ```
 
-![](https://github.com/Erickrus/uwapp/blob/master/demo.png?raw=true )
+![](https://github.com/Erickrus/uwapp/blob/master/demo.gif?raw=true )

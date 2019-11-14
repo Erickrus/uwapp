@@ -79,7 +79,7 @@ class MyMenu(UWMenu):
         aboutDialog = AboutDialog(
             self.app, 
             'About', 
-            'UWApp 0.4\n\nTUI based on urwid library in Python 3\nHu, Ying-Hao (hyinghao@hotmail.com)\n', 
+            'UWApp 0.5\n\nTUI based on urwid library in Python 3\nHu, Ying-Hao (hyinghao@hotmail.com)\n', 
             46, 8)
         aboutDialog.show()
         

@@ -15,18 +15,20 @@ class Application(UWApplication):
 
 
 if __name__ == "__main__":
-    while True:
-        try:
-            preference = PreferenceDialog.load_preference()
-            app = Application(MyMenu)
-            urwid.MainLoop(app, palette=UWTheme.get_theme(preference["theme"])).run()
-            break
-        except Exception as e:
-            logger.info(str(e.args))
-            if str(e.args).find("restart") > 0:
-                continue
-            else:
-                raise Exception(e)
-        
+    
+    def supervise():    
+        while True:
+            try:
+                preference = PreferenceDialog.load_preference()
+                app = Application(MyMenu)
+                urwid.MainLoop(app, palette=UWTheme.get_theme(preference["theme"])).run()
+                break
+            except Exception as e:
+                logger.info(str(e.args))
+                if str(e.args).find("restart") > 0:
+                    continue
+                else:
+                    raise Exception(e)
+    supervise()
 
 

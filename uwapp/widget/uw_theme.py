@@ -2,20 +2,20 @@ class UWTheme:
     turboVision = [
         ('dialog', 'white', 'light gray'),
         ('dialog.content', 'white', 'dark blue'),
-        
         ('menubar', 'black', 'light gray'),
         ('menu', 'black', 'light gray'),
         ('button', 'black', 'light green'),
+        ('radiobutton','black','light cyan'),
         ('background', 'dark blue', 'light gray'),
         ('reversed', 'standout', '')
     ]
     redHat = [
         ('dialog', 'black', 'light gray'),
         ('dialog.content', 'black', 'light gray'),
-        
         ('menubar', 'black', 'light gray'),
         ('menu', 'black', 'light gray'),
-        ('button', 'black', 'dark red'),
+        ('radiobutton','light gray','dark blue'),
+        ('button', 'white', 'dark red'),
         ('background', 'dark blue', 'dark blue'),
         ('reversed', 'standout', '')
     ]

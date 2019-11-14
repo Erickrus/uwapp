@@ -96,7 +96,10 @@ class UWApplication(urwid.Frame):
 
     def keypress(self, size, key):
         if key == 'esc' and self.menuInstances[self.currMenuId].level > 0:
-            self.fill.original_widget = self.fillOriginalWidget
+            if self.menuInstances[self.currMenuId].level == 1:
+                self.fill.original_widget = self.fillOriginalWidget
+            else:
+                self.fill.original_widget = self.fill.original_widget[0]
             self.menuInstances[self.currMenuId].level -= 1
             if self.menuInstances[self.currMenuId].level == 0:
                 self.set_focus_path(['header',0])
