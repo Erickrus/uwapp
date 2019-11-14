@@ -3,6 +3,7 @@ import urwid
 
 from uwapp.widget.uw_menu import UWMenu
 from uwapp.about_dialog import AboutDialog
+from uwapp.preference_dialog import PreferenceDialog
 import uwapp.util.logging as logging
 
 logger = logging.getLogger(__name__)
@@ -51,21 +52,9 @@ class MyMenu(UWMenu):
         "title": u"Edit",
         "type": "menu",
         "subMenu": [{
-            "title": u"Copy",
+            "title": u"Preference",
             "type": "menuItem",
-            "callback": None
-        }, {
-            "title": u"Cut",
-            "type": "menuItem",
-            "callback": None
-        }, {
-            "title": u"Paste",
-            "type": "menuItem",
-            "callback": None
-        }, {
-            "title": u"Delete",
-            "type": "menuItem",
-            "callback": None
+            "callback": "self.preference"
         }]
     }, {
         "title": u"Help",
@@ -93,5 +82,17 @@ class MyMenu(UWMenu):
             'UWApp 0.4\n\nTUI based on urwid library in Python 3\nHu, Ying-Hao (hyinghao@hotmail.com)\n', 
             46, 8)
         aboutDialog.show()
+        
+        self.app.set_focus_path(['body',1])
+        
+        
+    def preference(self, button):
+        self.app.clear_menu()
+        
+        preferenceDialog = PreferenceDialog(
+            self.app, 
+            'Preference', 
+            46, 12)
+        preferenceDialog.show()
         
         self.app.set_focus_path(['body',1])
